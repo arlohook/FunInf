@@ -29,6 +29,7 @@ fit.boots = function(model, boot.list, ncores = 4){
   msg.points = seq(0, B, 100)
 
   #refit model
+  message("Starting bootstrap")
   out = future_lapply(X = 1:B, FUN = function(i){
 
     if(i %in% msg.points){message(paste0(i, " of ", B, " iterations completed."))}

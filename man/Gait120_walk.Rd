@@ -38,21 +38,7 @@ https://springernature.figshare.com/articles/dataset/Comprehensive_Human_Locomot
 }
 \references{
 
-Cite as:
-
-@article{,
-   author = {Boo, Junyo and Seo, Dongwook and Kim, Minseung and Koo, Seungbum},
-   title = {Comprehensive human locomotion and electromyography dataset: Gait120},
-   journal = {Scientific Data},
-   volume = {12},
-   number = {1},
-   pages = {1023},
-   ISSN = {2052-4463},
-   DOI = {10.1038/s41597-025-05391-0},
-   url = {https://doi.org/10.1038/s41597-025-05391-0},
-   year = {2025},
-   type = {Journal Article}
-}
+Boo, J., Seo, D., Kim, M. et al. Comprehensive human locomotion and electromyography dataset: Gait120. Sci Data 12, 1023 (2025). https://doi.org/10.1038/s41597-025-05391-0
 
 }
 \examples{
