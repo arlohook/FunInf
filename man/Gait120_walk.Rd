@@ -19,13 +19,13 @@ This is a subset of the Gait120 comprhensive human locmotion and electromyograph
     \item{\code{Height (m)}}{Subject height in meters}
     \item{\code{BodyMass (kg)}}{Subject weight in kilograms}
     \item{\code{Stride_Time}}{Time take to complete the stride}
-    \item{\code{Hip}}{Sagital hip kinematics of the right leg interpolated to 101 points}
-    \item{\code{Knee}}{Sagital knee kinematics of the right leg interpolated to 101 points}
-    \item{\code{Ankle}}{Sagital ankle kinematics of the right leg interpolated to 101 points}
+    \item{\code{Hip}}{Sagittal hip kinematics of the right leg interpolated to 101 points}
+    \item{\code{Knee}}{Sagittal knee kinematics of the right leg interpolated to 101 points}
+    \item{\code{Ankle}}{Sagittal ankle kinematics of the right leg interpolated to 101 points}
   }
 }
 \details{
-Include in this data set is saggital hip, knee, and ankle kinematics of the right leg from the level ground walking trials in the Gait120
+Include in this data set is sagittal hip, knee, and ankle kinematics of the right leg from the level ground walking trials in the Gait120
 data set. Kinetmatic signals have been interpolated to 101 point to create a common grid for functional data analysis.
 Each functional observation is a single stride starting and ending with heel strike of the right leg.
 Stored within the data set
