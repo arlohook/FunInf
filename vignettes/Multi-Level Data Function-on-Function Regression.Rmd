@@ -52,7 +52,7 @@ mod = pffr(formula = Knee ~ Hip,
            algorithm = 'bam')
 
 ```
-### Step 3: Create list of bootstrap samples with `simple.boot.list`
+### Step 3: Create list of bootstrap samples with `level.boot.list`
 
 ```{r bootlist}
 set.seed(2026)
