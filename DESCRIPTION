@@ -1,0 +1,22 @@
+Package: FunInf
+Type: Package
+Title: What the Package Does (Title Case)
+Version: 0.1.0
+Authors@R: c(
+    person(
+      "Arlo", "Hook",
+      email = "arlohook10@hotmail.com",
+      role = c("aut", "cre")
+    )
+  )
+Description: A set of tools for easy implmentation of correlation and multiplity adjusted inference
+  with functional response models from the refund package.
+Imports:
+    refund,
+    purrr,
+    dplyr,
+    future,
+    future.apply
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.3.3
