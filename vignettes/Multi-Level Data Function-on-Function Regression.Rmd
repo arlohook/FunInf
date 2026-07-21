@@ -1,0 +1,99 @@
+---
+title: "Simple Function-on-Scalar Regression"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Multi-Level Data Function-on-Function Regression}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Case: Modeling sagittal knee kinematics as a function of sagittal hip kinematics during walking
+
+In this short example we will demonstrate how `FunInf` can be used to perform inference on a **function-on-function** regression model where there is hierarchical data. We will use the `Gait120_walk` data set where there are multiple strides included for each participant.
+
+### Step 1: Load Data
+
+```{r data, message=FALSE, warning=FALSE, out.width='70%', }
+library(FunInf)
+library(tidyverse)
+library(viridis)
+
+data("Gait120_walk")
+
+n = nrow(data)
+j = length(levels(data$Subject))
+colours = data.frame("colours" = sample(turbo(1000), j), "Subject" = levels(data$Subject))
+colours = left_join(data, colours, by = "Subject")
+
+par(mfrow = c(1,2))
+matplot(t(data$Hip), 
+        main = "Hip Flexion", xlab = "% Gait Cycle", ylab = "Degrees",
+        type = 'l', col = colours$colours)
+matplot(t(data$Knee), 
+        main = "Knee Flexion", xlab = "% Gait Cycle", ylab = "Degrees",
+        type = 'l', col = colours$colours)
+
+```
+
+### Step 2: Estimate model with `refund::pffr`
+
+```{r model, message=FALSE, warning=FALSE}
+library(refund)
+
+
+mod = pffr(formula = Knee ~ Hip,
+           data = data, 
+           bs.int = list(k = 10, m = c(2,1), bs = 'ps'), 
+           bs.yindex = list(k = 10, m = c(2,1), bs = 'ps'),
+           algorithm = 'bam')
+
+```
+### Step 3: Create list of bootstrap samples with `simple.boot.list`
+
+```{r bootlist}
+set.seed(2026)
+
+boot.list = level.boot.list(df = data, id = "Subject", B = 500)
+
+```
+
+
+### Step 4: Refit the model on the bootstrap samples with `fit.boots`
+
+```{r bootco, warning=FALSE}
+
+library(future)
+library(future.apply)
+
+boot.coefs = fit.boots(model = mod, boot.list = boot.list, ncores = 5)
+
+```
+
+### Step 5: Estimate correlation and multiplicity adjusted confidence bands with `estimate.cma`
+
+```{r cma, warning=FALSE}
+
+cma = lapply(boot.coefs, function(X){
+  
+    estimate.CMA(boot.grid = X$boots, est = X$original$value, alpha = 0.05)
+  
+})
+
+```
+
+
+### Step 6: Plot the coefficient function for Age
+```{r plot, out.width='70%'}
+ggplot(cma$`Hip(yindex)`, aes(x = ind, y = est, ymin = LCI, ymax = UCI))+
+  geom_line()+
+  geom_ribbon(alpha = 0.4, fill = "red")+
+  geom_hline(yintercept = 0, lty = 2)+
+  theme_light()+
+  labs(x = "% Gait Cycle", y = "Beta")
+```
+
+Based on this we would say there is a consistent and significant positive association between hip flexion and knee flexion across the whole gait cycle.

@@ -18,7 +18,7 @@ This is a subset of the Gait120 comprhensive human locmotion and electromyograph
     \item{\code{Sex}}{Subject sex}
     \item{\code{Height (m)}}{Subject height in meters}
     \item{\code{BodyMass (kg)}}{Subject weight in kilograms}
-    \item{\code{Stride_Time}}{Time take to complete the stride}
+    \item{\code{Stride_Time}}{Time takes to complete the stride in seconds}
     \item{\code{Hip}}{Sagittal hip kinematics of the right leg interpolated to 101 points}
     \item{\code{Knee}}{Sagittal knee kinematics of the right leg interpolated to 101 points}
     \item{\code{Ankle}}{Sagittal ankle kinematics of the right leg interpolated to 101 points}
